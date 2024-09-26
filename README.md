@@ -168,8 +168,8 @@ Implementation of Predictive Models: Use machine learning models to predict the 
 Expansion to Other Datasets: Incorporate more global aviation data to broaden the scope of the analysis.
 ## Conclusion
 This project provides valuable insights into aviation safety by analyzing accident data across various dimensions. The visualizations generated in Tableau allow for a clear understanding of which factors contribute to accidents, and the recommendations help guide decisions regarding aircraft purchases and risk management.
-
-
+## Presentation Link
+file:///C:/Users/ADMIN/Downloads/Aviation%20Accident%20Data%20Analysis.pdf
 
 
 
