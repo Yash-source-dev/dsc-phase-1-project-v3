@@ -1,289 +1,175 @@
-# Phase 1 Project Description
-
-You've made it all the way through the first phase of this course - take a minute to celebrate your awesomeness!
-
-Now you will put your new skills to use with a large end-of-Phase project!
-
-In this project description, we will cover:
-
-* [***Project Overview:***](#project-overview) the project goal, audience, and dataset
-* [***Deliverables:***](#deliverables) the specific items you are required to produce for this project
-* [***Grading:***](#grading) how your project will be scored
-* [***Getting Started:***](#getting-started) guidance for how to begin your first project
-
+### Aviation Accident Data Analysis Project
 ## Project Overview
+This project focuses on analyzing aviation accident data to identify the safest aircraft models and related risk factors. The objective is to help our company make informed decisions about purchasing aircraft based on accident risk, model reliability, and other key factors. The data is drawn from the Aviation Accident Database & Synopses (up to 2023), and the project leverages tools like Python for data analysis and Tableau for visualizing results.
+
+## Business Understanding
+The analysis is driven by the following core business questions:
+Which aircraft models are associated with the highest number of accidents?
+Which locations have experienced the highest frequency of aviation accidents?
+How does injury severity vary by aircraft model?
+What is the relationship between aircraft model, category, and damage incurred?
+Which aircraft models have a high incidence of accidents based on their manufacturing locations?
+What is the most reliable engine type in terms of accident rates?
+Which aircraft models incur the most accidents based on their purpose of flight (e.g., commercial, private)?
+Is there a correlation between weather conditions and the occurrence of accidents? Additionally, is there a correlation between weather and accident locations?
+How many accidents occur in each phase of flight (e.g., takeoff, landing, cruising)?
+Are there specific conditions (e.g., weather, aircraft type) that correlate with accidents in particular flight phases?
+The primary goal is to identify aircraft models and conditions that lead to higher accident rates, enabling safer aircraft purchase decisions.
+
+## Data Description
+The dataset includes aviation accidents and incidents up to 2023, with the following key columns:
+Event.Id, Accident.Number, Event.Date, Location, Country, Injury.Severity, Aircraft.Damage, Aircraft.Category, Make, Model, Engine.Type, Purpose.of.Flight, Weather.Condition, Broad.Phase.of.Flight, Total.Fatal.Injuries, Total.Serious.Injuries, Total.Minor.Injuries, Total.Uninjured.
+Data Cleaning Process
+The raw data required extensive preprocessing, including:
+Duplicate Removal: Removed duplicate entries for accidents.
+Missing Data Handling: Used mean, median, and mode imputation to fill missing values.
+Unnecessary Columns Dropped: Columns not relevant to the analysis were removed to streamline the dataset.
+The final cleaned dataset allowed for focused analysis on aircraft models, locations, injury severity, and other critical factors.
+
+## Data Analysis
+The analysis was conducted to address each business question. Key steps include:
+Grouping Data: Aggregated data by aircraft models, locations, weather conditions, etc.
+Correlation Analysis: Analyzed relationships between accident rates and various factors like weather conditions and flight phases.
+Injury Severity Analysis: Examined how injury severities (fatal, serious, minor) vary by aircraft model.
+Filtering and Ranking: Ranked aircraft models by accident frequency and filtered for insights on specific conditions (weather, location, etc.).
+Example of Key Analysis:
+Injury Severity by Aircraft Model: Used Tableau to create bar charts and box plots visualizing how injury severity differs across aircraft models, with models like X showing higher rates of serious and fatal injuries.
+Correlation Between Weather and Accidents: Conducted correlation analysis in Tableau to show how weather conditions (e.g., rain, fog) significantly impact accident frequency, especially during critical flight phases like takeoff and landing.
+
+## Aircraft model that causes alot of accidents
+![image](https://github.com/user-attachments/assets/ec2f4042-5e6d-41fd-a510-8c4a870b1062)
+
+## Aircraft model that causes few accidents
+![image](https://github.com/user-attachments/assets/43a5aead-6510-4752-8634-c6f54f2ac860)
+
+## location tht has been engaged with alot of accidents?
+![image](https://github.com/user-attachments/assets/39587dd8-963e-482a-8146-9f450f1c7b2b)
+
+##location with least accidents?
+![image](https://github.com/user-attachments/assets/ea8fee6a-7437-42b6-bf40-b77a88caac1e)
+
+## 3.What are in these locations that cause a lot of accidents?
+.can these two be the reason['Weather.Condition', 'Broad.phase.of.flight',]
+.and what percantage do they contribute?
+
+                  Location Weather.Condition  Accidents_By_Weather  \
+0         (N) SKWENTNA, AK               VMC                     1   
+1                        ,               VMC                     2   
+2                     , AO               VMC                     2   
+3               0WASSO, OK               VMC                     1   
+4      1 1/2 MI.N. MAY, KS               IMC                     1   
+...                    ...               ...                   ...   
+25167           Zillah, WA               VMC                     1   
+25168       Zionsville, IN               VMC                     2   
+25169     Zurich, Eswatini               IMC                     1   
+25170          Zwingle, IA               VMC                     1   
+25171           helena, MT               VMC                     1   
+
+       Total_Accidents  Weather_Percentage  
+0                    1               100.0  
+1                    2               100.0  
+2                    2               100.0  
+3                    1               100.0  
+4                    1               100.0  
+...                ...                 ...  
+25167                1               100.0  
+25168                2               100.0  
+25169                1               100.0  
+25170                1               100.0  
+25171                1               100.0 
+
+
+### according to my research
+### vmc=is good weather
+### IMC=bad weather
+### lets find out the weather that occured much during accidents
+
+Weather.Condition	Accident_Count
+0	IMC	5116
+1	UNK	634
+2	Unk	48
+3	VMC	70190
+
+## Plotting the graph to show whhich weather condition occured most 
+
+![image](https://github.com/user-attachments/assets/0cb7cac2-0f7e-4cc2-aa26-f2201d494c85)
+
+### from our analysis VMC has occured alot which means the weather conditions were good.Therefore,weather conditions is a least factor tht affects the accidents
+
+### Correlation between Weather Condition and Accident Count: 0.7346408009582759
+
+## ### 4 which aircafts incurred alot of accidents depending on Purpose.of.flight?
+### How many accidents occur in each phase of flight?
+
+  Broad.phase.of.flight  Accident_Count
+12               unknown           17194
+5                Landing           14897
+9                Takeoff           12094
+2                 Cruise            9698
+6            Maneuvering            7989
+0               Approach            6220
+1                  Climb            1849
+10                  Taxi            1736
+3                Descent            1676
+4              Go-around            1336
+8               Standing             677
+11               Unknown             512
+7                  Other             110
+
+## 5 can these two be the reason['Weather.Condition', 'Broad.phase.of.flight',]?
+Weather.Condition       IMC  UNK  Unk    VMC
+Broad.phase.of.flight                       
+Approach                915   32    0   5273
+Climb                   254   20    0   1575
+Cruise                 1548  193    0   7957
+Descent                 183   17    0   1476
+Go-around               149    3    0   1184
+Landing                 372   48    0  14477
+Maneuvering             435   62    0   7492
+Other                     3    2    0    105
+Standing                 16   15    0    646
+Takeoff                 422   36    0  11636
+Taxi                     49    9    0   1678
+Unknown                  54   79    0    379
+unknown                 716  118   48  16312
+
+![image](https://github.com/user-attachments/assets/e0c07b32-cbcf-4a84-accc-379b469b8d66)
+
+
+## injury severity depending on the aircraft model?
+## Injury Severity by Top 30 Aircraft Models
+![image](https://github.com/user-attachments/assets/59f01f26-2f42-4f0e-81f5-14a02c5a005b)
+## Injury Severity by Least 30 Aircraft Models
+![image](https://github.com/user-attachments/assets/bb5e3568-f99a-46a9-89fd-e2f522b6548a)
+from the 2 bar graphs my advice is for u to choose an aircraft model(top 30 aircraft models with the least number of injuries.) which will be safer incase of an accident.
+
+## ## 7.the best engine type in an aircraft?
+Top 30 Engine Types by Number of Accidents
+![image](https://github.com/user-attachments/assets/f72cfb28-83be-4c0e-b030-bd0d94020b6c)
+![image](https://github.com/user-attachments/assets/e7d56717-936c-417e-89d8-1aed1ced25a4)
+Top 30 Engine Types by Number of Accidents
+![image](https://github.com/user-attachments/assets/84d115f3-43fe-4174-8cb9-c3e76ee3ee0e)
+from the two scatter plots u are able to chose the best engine_type.
+
+## Tableau Dashboards
+## Visualization and Filters
+The dashboards in Tableau are designed to answer the business questions interactively.
+https://public.tableau.com/app/profile/samuel.yashua7815/viz/Book1_17273347252670/Dashboard1?publish=yes
+## Recommendations
+Based on the analysis, the following recommendations can be made:
+.Consider purchasing aircraft models with a low incidence of accidents and high reliability based on injury severity and damage data.
+.Select aircraft with the most reliable engine types, as these have been shown to have lower accident rates.
+. Pay attention to weather patterns and accident-prone locations when planning flights, especially during certain phases like takeoff and landing.
+## Next Steps
+Further Exploration: Conduct deeper analysis into aircraft categories and compare accident rates based on newer aircraft models.
+Implementation of Predictive Models: Use machine learning models to predict the likelihood of accidents based on aircraft, weather, and location data.
+Expansion to Other Datasets: Incorporate more global aviation data to broaden the scope of the analysis.
+## Conclusion
+This project provides valuable insights into aviation safety by analyzing accident data across various dimensions. The visualizations generated in Tableau allow for a clear understanding of which factors contribute to accidents, and the recommendations help guide decisions regarding aircraft purchases and risk management.
 
-For this project, you will use data cleaning, imputation, analysis, and visualization to generate insights for a business stakeholder.
 
-### Business Problem
 
-Your company is expanding in to new industries to diversify its portfolio. Specifically, they are interested in purchasing and operating airplanes for commercial and private enterprises, but do not know anything about the potential risks of aircraft. You are charged with determining which aircraft are the lowest risk for the company to start this new business endeavor. You must then translate your findings into actionable insights that the head of the new aviation division can use to help decide which aircraft to purchase.
 
-### The Data
 
-In the `data` folder is a [dataset](https://www.kaggle.com/datasets/khsamaha/aviation-accident-database-synopses) from the National Transportation Safety Board that includes aviation accident data from 1962 to 2023 about civil aviation accidents and selected incidents in the United States and international waters.
 
-It is up to you to decide what data to use, how to deal with missing values, how to aggregate the data, and how to visualize it in an interactive dashboard.
-
-### Key Points
-
-* **Your analysis should yield three concrete business recommendations.** The key idea behind dealing with missing values, aggregating and visualizaing data is to help your organization make data driven decisions. You will relate your findings to business intelligence by making recommendations for how the business should move forward with the new aviation opportunity.
-
-* **Communicating about your work well is extremely important.** Your ability to provide value to an organization - or to land a job there - is directly reliant on your ability to communicate with them about what you have done and why it is valuable. Create a storyline your audience (the head of the aviation division) can follow by walking them through the steps of your process, highlighting the most important points and skipping over the rest.
-
-* **Use plenty of visualizations.** Visualizations are invaluable for exploring your data and making your findings accessible to a non-technical audience. Spotlight visuals in your presentation, but only ones that relate directly to your recommendations. Simple visuals are usually best (e.g. bar charts and line graphs), and don't forget to format them well (e.g. labels, titles).
-
-## Deliverables
-
-There are three deliverables for this project:
-
-* A **non-technical presentation**
-* A **Jupyter Notebook**
-* A **GitHub repository**
-* An **Interactive Dashboard**
-
-### Non-Technical Presentation
-
-The non-technical presentation is a slide deck presenting your analysis to business stakeholders.
-
-* ***Non-technical*** does not mean that you should avoid mentioning the technologies or techniques that you used, it means that you should explain any mentions of these technologies and avoid assuming that your audience is already familiar with them.
-* ***Business stakeholders*** means that the audience for your presentation is the business, not the class or teacher. Do not assume that they are already familiar with the specific business problem.
-
-The presentation describes the project ***goals, data, methods, and results***. It must include at least ***three visualizations*** which correspond to ***three business recommendations***.
-
-We recommend that you follow this structure, although the slide titles should be specific to your project:
-
-1. Beginning
-    * Overview
-    * Business Understanding
-2. Middle
-    * Data Understanding
-    * Data Analysis
-3. End
-    * Recommendations
-    * Next Steps
-    * Thank You
-       * This slide should include a prompt for questions as well as your contact information (name and LinkedIn profile)
-
-You will give a live presentation of your slides and submit them in PDF format on Canvas. The slides should also be present in the GitHub repository you submit with a file name of `presentation.pdf`.
-
-The graded elements of the presentation are:
-
-* Presentation Content
-* Slide Style
-* Presentation Delivery and Answers to Questions
-
-See the [Grading](#grading) section for further explanation of these elements.
-
-For further reading on creating professional presentations, check out:
-
-* [Presentation Content](https://github.com/learn-co-curriculum/dsc-project-presentation-content)
-* [Slide Style](https://github.com/learn-co-curriculum/dsc-project-slide-design)
-
-### Jupyter Notebook
-
-The Jupyter Notebook is a notebook that uses Python and Markdown to present your analysis to a data science audience.
-
-* ***Python and Markdown*** means that you need to construct an integrated `.ipynb` file with Markdown (headings, paragraphs, links, lists, etc.) and Python code to create a well-organized, skim-able document.
-  * The notebook kernel should be restarted and all cells run before submission, to ensure that all code is runnable in order.
-  * Markdown should be used to frame the project with a clear introduction and conclusion, as well as introducing each of the required elements.
-* ***Data science audience*** means that you can assume basic data science proficiency in the person reading your notebook. This differs from the non-technical presentation.
-
-Along with the presentation, the notebook also describes the project ***goals, data, methods, and results***.
-
-You will submit the notebook in PDF format on Canvas as well as in `.ipynb` format in your GitHub repository.
-
-The graded elements for the Jupyter Notebook are:
-
-* Business Understanding
-* Data Understanding
-* Data Preparation
-* Data Analysis
-* Code Quality
-
-See the [Grading](#grading) section for further explanation of these elements.
-
-### GitHub Repository
-
-The GitHub repository is the cloud-hosted directory containing all of your project files as well as their version history.
-
-This repository link will be the project link that you include on your resume, LinkedIn, etc. for prospective employers to view your work. Note that we typically recommend that 3 links are highlighted (out of 5 projects) so don't stress too much about getting this one to be perfect! There will also be time after graduation for cosmetic touch-ups.
-
-A professional GitHub repository has:
-
-1. `README.md`
-    * A file called `README.md` at the root of the repository directory, written in Markdown; this is what is rendered when someone visits the link to your repository in the browser
-    * This file contains these sections:
-       * Overview
-       * Business Understanding
-          * Include stakeholder and key business questions
-       * Data Understanding and Analysis
-          * Source of data
-          * Description of data
-          * Three visualizations (the same visualizations presented in the slides and notebook)
-       * Conclusion
-          * Summary of conclusions including three relevant findings
-2. Commit history
-   * Progression of updates throughout the project time period, not just immediately before the deadline
-   * Clear commit messages
-   * Commits from all team members (if a group project)
-3. Organization
-   * Clear folder structure
-   * Clear names of files and folders
-   * Easily-located notebook and presentation linked in the README
-4. Notebook(s)
-   * Clearly-indicated final notebook that runs without errors
-   * Exploratory/working notebooks (can contain errors, redundant code, etc.) from all team members (if a group project)
-5. `.gitignore`
-   * A file called `.gitignore` at the root of the repository directory instructs Git to ignore large, unnecessary, or private files
-     * Because it starts with a `.`, you will need to type `ls -a` in the terminal in order to see that it is there
-   * GitHub maintains a [Python .gitignore](https://github.com/github/gitignore/blob/master/Python.gitignore) that may be a useful starting point for your version of this file
-   * To tell Git to ignore more files, just add a new line to `.gitignore` for each new file name
-     * Consider adding `.DS_Store` if you are using a Mac computer, as well as project-specific file names
-     * If you are running into an error message because you forgot to add something to `.gitignore` and it is too large to be pushed to GitHub [this blog post](https://medium.com/analytics-vidhya/tutorial-removing-large-files-from-git-78dbf4cf83a?sk=c3763d466c7f2528008c3777192dfb95)(friend link) should help you address this
-
-You wil submit a link to the GitHub repository on Canvas.
-
-See the [Grading](#grading) section for further explanation of how the GitHub repository will be graded.
-
-For further reading on creating professional notebooks and `README`s, check out [this reading](https://github.com/learn-co-curriculum/dsc-repo-readability-v2-2).
-
-### Interactive Dashboard
-
-The interactive dashboard is a collection of views that allows the viewer to change the views to understand different features in the data. This dashboard will be linked within your GitHub repository README.md file so that users can explore your analysis. Make sure you follow visual best practices that you have learned in this course. Below is an example of what you could produce for this assignment.
-![tableau dashboard for aviation accidents](https://raw.githubusercontent.com/learn-co-curriculum/dsc-phase-1-project-v3/master/example_dashboard.png)
-
-## Grading
-
-***To pass this project, you must pass each project rubric objective.*** The project rubric objectives for Phase 1 are:
-
-1. Data Communication
-2. Authoring Jupyter Notebooks
-3. Data Manipulation and Analysis with `pandas`
-4. Interactive Data Visualization
-
-### Data Communication
-
-Communication is a key "soft skill". In [this survey](https://www.payscale.com/data-packages/job-skills), 46% of hiring managers said that recent college grads were missing this skill.
-
-Because "communication" can encompass such a wide range of contexts and skills, we will specifically focus our Phase 1 objective on Data Communication. We define Data Communication as:
-
-> Communicating basic data analysis results to diverse audiences via writing and live presentation
-
-To further define some of these terms:
-
-* By "basic data analysis" we mean that you are filtering, sorting, grouping, and/or aggregating the data in order to answer business questions. This project does not involve inferential statistics or machine learning, although descriptive statistics such as measures of central tendency are encouraged.
-* By "results" we mean your ***three visualizations and recommendations***.
-* By "diverse audiences" we mean that your presentation and notebook are appropriately addressing a business and data science audience, respectively.
-
-Below are the definitions of each rubric level for this objective. This information is also summarized in the rubric, which is attached to the project submission assignment.
-
-#### Exceeds Objective
-Creates and describes appropriate visualizations for given business questions, where each visualization fulfills all elements of the checklist
-
-> This "checklist" refers to the Data Visualization checklist within the larger Phase 1 Project Checklist
-
-#### Meets Objective (Passing Bar)
-Creates and describes appropriate visualizations for given business questions
-
-> This objective can be met even if all checklist elements are not fulfilled. For example, if there is some illegible text in one of your visualizations, you can still meet this objective
-
-#### Approaching Objective
-Creates visualizations that are not related to the business questions, or uses an inappropriate type of visualization
-
-> Even if you create very compelling visualizations, you cannot pass this objective if the visualizations are not related to the business questions
-
-> An example of an inappropriate type of visualization would be using a line graph to show the correlation between two independent variables, when a scatter plot would be more appropriate
-
-#### Does Not Meet Objective
-Does not submit the required number of visualizations
-
-### Authoring Jupyter Notebooks
-
-According to [Kaggle's 2020 State of Data Science and Machine Learning Survey](https://www.kaggle.com/kaggle-survey-2020), 74.1% of data scientists use a Jupyter development environment, which is more than twice the percentage of the next-most-popular IDE, Visual Studio Code. Jupyter Notebooks allow for reproducible, skim-able code documents for a data science audience. Comfort and skill with authoring Jupyter Notebooks will prepare you for job interviews, take-home challenges, and on-the-job tasks as a data scientist.
-
-The key feature that distinguishes *authoring Jupyter Notebooks* from simply *writing Python code* is the fact that Markdown cells are integrated into the notebook along with the Python cells in a notebook. You have seen examples of this throughout the curriculum, but now it's time for you to practice this yourself!
-
-Below are the definitions of each rubric level for this objective. This information is also summarized in the rubric, which is attached to the project submission assignment.
-
-#### Exceeds Objective
-Uses Markdown and code comments to create a well-organized, skim-able document that follows all best practices
-
-> Refer to the [repository readability reading](https://github.com/learn-co-curriculum/dsc-repo-readability-v2-2) for more tips on best practices
-
-#### Meets Objective (Passing Bar)
-Uses some Markdown to create an organized notebook, with an introduction at the top and a conclusion at the bottom
-
-#### Approaching Objective
-Uses Markdown cells to organize, but either uses only headers and does not provide any explanations or justifications, or uses only plaintext without any headers to segment out sections of the notebook
-
-> Headers in Markdown are delineated with one or more `#`s at the start of the line. You should have a mixture of headers and plaintext (text where the line does not start with `#`)
-
-#### Does Not Meet Objective
-Does not submit a notebook, or does not use Markdown cells at all to organize the notebook
-
-### Data Manipulation and Analysis with `pandas`
-
-`pandas` is a very popular data manipulation library, with over 2 million downloads on Anaconda (`conda install pandas`) and over 19 million downloads on PyPI (`pip install pandas`) at the time of this writing. In our own internal data, we see that the overwhelming majority of Flatiron School DS grads use `pandas` on the job in some capacity.
-
-Unlike in base Python, where the Zen of Python says "There should be one-- and preferably only one --obvious way to do it", there is often more than one valid way to do something in `pandas`. However there are still more efficient and less efficient ways to use it. Specifically, the best `pandas` code is *performant* and *idiomatic*.
-
-Performant `pandas` code utilizes methods and broadcasting rather than user-defined functions or `for` loops. For example, if you need to strip whitespace from a column containing string data, the best approach would be to use the [`pandas.Series.str.strip` method](https://pandas.pydata.org/docs/reference/api/pandas.Series.str.strip.html) rather than writing your own function or writing a loop. Or if you want to multiply everything in a column by 100, the best approach would be to use broadcasting (e.g. `df["column_name"] * 100`) instead of a function or loop. You can still write your own functions if needed, but only after checking that there isn't a built-in way to do it.
-
-Idiomatic `pandas` code has variable names that are meaningful words or abbreviations in English, that are related to the purpose of the variables. You can still use `df` as the name of your DataFrame if there is only one main DataFrame you are working with, but as soon as you are merging multiple DataFrames or taking a subset of a DataFrame, you should use meaningful names. For example, `df2` would not be an idiomatic name, but `movies_and_reviews` could be.
-
-We also recommend that you rename all DataFrame columns so that their meanings are more understandable, although it is fine to have acronyms. For example, `"col1"` would not be an idiomatic name, but `"USD"` could be.
-
-Below are the definitions of each rubric level for this objective. This information is also summarized in the rubric, which is attached to the project submission assignment.
-
-#### Exceeds Objective
-Uses `pandas` to prepare data and answer business questions in an idiomatic, performant way
-
-#### Meets Objective (Passing Bar)
-Successfully uses `pandas` to prepare data in order to answer business questions
-
-> This includes projects that _occasionally_ use base Python when `pandas` methods would be more appropriate (such as using `enumerate()` on a DataFrame), or occasionally performs operations that do not appear to have any relevance to the business questions
-
-#### Approaching Objective
-Uses `pandas` to prepare data, but makes significant errors
-
-> Examples of significant errors include: the result presented does not actually answer the stated question, the code produces errors, the code _consistently_ uses base Python when `pandas` methods would be more appropriate, or the submitted notebook contains significant quantities of code that is unrelated to the presented analysis (such as copy/pasted code from the curriculum or StackOverflow)
-
-#### Does Not Meet Objective
-Unable to prepare data using `pandas`
-
-> This includes projects that successfully answer the business questions, but do not use `pandas` (e.g. use only base Python, or use some other tool like R, Tableau, or Excel)
-
-### Interactive Data Visualization
-
-Tableau is a powerful data analysis tool that allows data to be presented in a manner that allows it to be easily digestible with visualizations and charts to aid in the simplification of the data and its analysis. Tableau contains many customizable features and makes it easy to share in many ways. We recommend you use Tableau for your interactive data visualization now that you have experience with it.
-
-Here are the definitions of each rubric level for this objective.
-
-#### Exceeds Objective
-Creates an easy to use dashboard to answer business questions
-
-#### Meets Objective
-Successfully creates a dashboard to answer business questions
-
-#### Approaching Objective
-Creates a dashboard, but it is difficult to use
-
-#### Does Not Meet Objective
-Unable to create a dashboard 
-
-## Getting Started
-
-Please start by reviewing the contents of this project description. If you have any questions, please ask your instructor ASAP.
-
-Next, you will need to complete the [***Project Proposal***](#project_proposal) which must be reviewed by your instructor before you can continue with the project.
-
-Then, you will need to create a GitHub repository. There are three options:
-Interactive Data Visualization
-1. Look at the [Phase 1 Project Templates and Examples repo](https://github.com/learn-co-curriculum/dsc-project-template) and follow the directions in the MVP branch.
-2. Fork the [Phase 1 Project Repository](https://github.com/learn-co-curriculum/dsc-phase-1-project-v3), clone it locally, and work in the `student.ipynb` file. Make sure to also add and commit a PDF of your presentation to your repository with a file name of `presentation.pdf`.
-3. Create a new repository from scratch by going to [github.com/new](https://github.com/new) and copying the data files from one of the above resources into your new repository. This approach will result in the most professional-looking portfolio repository, but can be more complicated to use. So if you are getting stuck with this option, try one of the above options instead.
-
-## Summary
-This project will give you a valuable opportunity to develop your data science skills using real-world data. The end-of-phase projects are a critical part of the program because they give you a chance to bring together all the skills you've learned, apply them to realistic projects for a business stakeholder, practice communication skills, and get feedback to help you improve. You've got this!
 
