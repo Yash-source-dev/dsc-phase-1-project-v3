@@ -1,4 +1,6 @@
 ### Aviation Accident Data Analysis Project
+![pexels-chevanon-333525](https://github.com/user-attachments/assets/b9593b89-18da-4231-a419-1d75b07b01f2)
+
 ## Project Overview
 This project focuses on analyzing aviation accident data to identify the safest aircraft models and related risk factors. The objective is to help our company make informed decisions about purchasing aircraft based on accident risk, model reliability, and other key factors. The data is drawn from the Aviation Accident Database & Synopses (up to 2023), and the project leverages tools like Python for data analysis and Tableau for visualizing results.
 
